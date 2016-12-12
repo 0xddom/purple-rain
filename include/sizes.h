@@ -1,0 +1,12 @@
+#ifndef _SIZES_H
+#define _SIZES_H
+
+#define SURFACE_WIDTH 640
+#define SURFACE_HEIGHT 480
+#define BACKGROUND_COLOR 16,41,112,255
+#define DROP_COLOR 162,181,232,255
+#define FPS 60
+#define TICKS_PER_FRAME 1000 / FPS
+#define NDROPS 500
+
+#endif
