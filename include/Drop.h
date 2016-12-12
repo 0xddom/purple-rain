@@ -8,10 +8,15 @@ class Drop {
   float x;
   float y;
   float yspeed;
+  float z;
+  float len;
+  float thick;
+  float acc;
 
   SDL_Renderer *renderer;
 
   void reset();
+  void drawLine();
  public:
   Drop(SDL_Renderer *);
   ~Drop();
