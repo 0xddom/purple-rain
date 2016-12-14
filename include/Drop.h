@@ -2,16 +2,18 @@
 #define _DROP_H
 
 #include <SDL2/SDL.h>
+#include <Vector.h>
 
 class Drop {
  private:
-  float x;
-  float y;
-  float yspeed;
-  float z;
+  Vector pos, speed, acc;
+  //  float x;
+  //  float y;
+  //  float yspeed;
+  //  float z;
   float len;
   float thick;
-  float acc;
+  //  float acc;
 
   SDL_Renderer *renderer;
 

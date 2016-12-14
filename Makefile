@@ -3,7 +3,7 @@ CFLAGS=-Wall -g -I./include
 LDFLAGS=-lSDL2
 
 OBJS=obj/main.cpp.o obj/Game.cpp.o obj/Drop.cpp.o obj/utils.cpp.o
-OBJS+=obj/Timer.cpp.o
+OBJS+=obj/Timer.cpp.o obj/Vector.cpp.o
 
 bin/rain: $(OBJS)
 	$(CXX) $(CFLAGS) $(LDFLAGS) $^ -o $@
