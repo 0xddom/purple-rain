@@ -1,4 +1,5 @@
 #include <Vector.h>
+#include <math.h>
 
 Vector::Vector()
   : x(0), y(0), z(0) {}
@@ -22,4 +23,16 @@ Vector Vector::operator+=(Vector other) {
   y += other.y;
   z += other.z;
   return Vector(x,y,z);
+}
+
+Vector Vector::operator*(float scale) {
+  return Vector(x * scale, y * scale, z * scale);
+}
+
+float Vector::dot(Vector other) {
+  return x * other.x + y * other.y + z * other.z;
+}
+
+float Vector::length() {
+  return sqrt (dot (*this));
 }

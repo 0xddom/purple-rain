@@ -5,9 +5,8 @@
 #include <stdio.h>
 #include <Vector.h>
 
-Drop::Drop(SDL_Renderer *renderer)
-  : pos(Vector()), speed(Vector()),
-    acc(Vector()), renderer(renderer) {
+Drop::Drop()
+  : pos(Vector()), speed(Vector()), acc(Vector()) {
   reset ();
 }
 
@@ -19,7 +18,7 @@ void Drop::update() {
 
   if (pos.y > SURFACE_HEIGHT) reset ();
 
-#if 0
+#ifdef DEBUG
   fprintf(stdout,
           "pos(%f, %f, %f)\n"
           "speed(%f, %f, %f)\n"
@@ -30,23 +29,15 @@ void Drop::update() {
 #endif
 }
 
-void Drop::draw() {
-  SDL_SetRenderDrawColor (this->renderer, DROP_COLOR);
-  /* SDL_Rect rect;
-  rect.x = this->x;
-  rect.y = this->y;
-  rect.w = this->thick;
-  rect.y = this->len;
-
-  SDL_RenderDrawRect (this->renderer, &rect);
-  //SDL_RenderDrawLine (this->renderer, this->x, this->y, this->x, this->y + this->len);*/
-  drawLine ();
+void Drop::draw(SDL_Renderer *renderer) {
+  SDL_SetRenderDrawColor (renderer, DROP_COLOR);
+  drawLine (renderer);
 }
 
-void Drop::drawLine() {
+void Drop::drawLine(SDL_Renderer *renderer) {
   int i;
-  for (i = 0; i < this->thick; i++) {
-    SDL_RenderDrawLine (this->renderer, pos.x + i, pos.y, pos.x + i, pos.y + this->len);
+  for (i = 0; i < thick; i++) {
+    SDL_RenderDrawLine (renderer, pos.x + i, pos.y, pos.x + i, pos.y + len);
   }
 }
 

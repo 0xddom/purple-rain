@@ -7,14 +7,11 @@
 #include <utils.h>
 #include <stdlib.h>
 
-Game::Game(int argc, char** argv) {
+Game::Game(ICompositeNode *root)
+  : root(root) {
   init_random ();
-  this->success = initSDL () && initDrops ();
-  if(this->success) {
-    this->quit = false;
-    //this->drop = new Drop (this->renderer);
-
-  }
+  this->success = initSDL ();
+  if(this->success) this->quit = false;
 }
 
 Game::~Game() {
@@ -28,20 +25,20 @@ int Game::run() {
   return 0;
 }
 
-bool Game::initDrops() {
-  this->drops = (Drop **)calloc (NDROPS, sizeof (Drop *));
-  int i;
-  if (this->drops == NULL) {
-    fprintf (stderr, "Could not create the drops\n");
-    return false;
-  }
+// bool Game::initDrops() {
+//   this->drops = (Drop **)calloc (NDROPS, sizeof (Drop *));
+//   int i;
+//   if (this->drops == NULL) {
+//     fprintf (stderr, "Could not create the drops\n");
+//     return false;
+//   }
 
-  for (i = 0; i < NDROPS; i++) {
-    this->drops[i] = new Drop (this->renderer);
-  }
+//   for (i = 0; i < NDROPS; i++) {
+//     this->drops[i] = new Drop ();
+//   }
 
-  return true;
-}
+//   return true;
+// }
 
 bool Game::initSDL() {
   this->window = NULL;
@@ -90,21 +87,23 @@ void Game::update() {
   while (SDL_PollEvent (&e) != 0) {
     if (e.type == SDL_QUIT) stopLoop();
   }
-  int i;
-  for (i = 0; i < NDROPS; i++)
-    this->drops[i]->update ();
+  root->update ();
+  // int i;
+  // for (i = 0; i < NDROPS; i++)
+  //   this->drops[i]->update ();
 }
 
 void Game::draw() {
-  background (BACKGROUND_COLOR);
-  int i;
-  for (i = 0; i < NDROPS; i++)
-    this->drops[i]->draw ();
-  SDL_RenderPresent (this->renderer);
+  root->draw (renderer);
+  // background (BACKGROUND_COLOR);
+  // int i;
+  // for (i = 0; i < NDROPS; i++)
+  //   this->drops[i]->draw (renderer);
+  SDL_RenderPresent (renderer);
 }
 
 void Game::background(int r, int g, int b, int a) {
-  SDL_SetRenderDrawColor ( this->renderer, r, g, b, a);
-  SDL_RenderClear ( this->renderer );
+  SDL_SetRenderDrawColor (this->renderer, r, g, b, a);
+  SDL_RenderClear (this->renderer);
   // SDL_FillRect (this->surface, NULL, SDL_MapRGB (this->surface->format, r, g, b));
 }

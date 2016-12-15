@@ -3,8 +3,9 @@
 
 #include <SDL2/SDL.h>
 #include <Vector.h>
+#include <ICompositeNode.h>
 
-class Drop {
+class Drop : public ICompositeNode {
  private:
   Vector pos, speed, acc;
   //  float x;
@@ -15,15 +16,13 @@ class Drop {
   float thick;
   //  float acc;
 
-  SDL_Renderer *renderer;
-
   void reset();
-  void drawLine();
+  void drawLine(SDL_Renderer*);
  public:
-  Drop(SDL_Renderer *);
-  ~Drop();
-  void update();
-  void draw();
+  Drop();
+  virtual ~Drop();
+  virtual void update();
+  virtual void draw(SDL_Renderer*);
 };
 
 #endif

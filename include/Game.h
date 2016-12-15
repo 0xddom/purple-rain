@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include <Drop.h>
+#include <ICompositeNode.h>
 
 class Game {
  private:
@@ -10,13 +11,13 @@ class Game {
   SDL_Surface *surface;
   SDL_Renderer *renderer;
 
-  Drop **drops;
+  ICompositeNode *root;
 
   bool quit;
   bool success;
 
   bool initSDL();
-  bool initDrops();
+  /* bool initDrops(); */
   void loop();
   void stopLoop();
 
@@ -25,7 +26,7 @@ class Game {
   void update();
   void draw();
  public:
-  Game(int, char**);
+  Game(ICompositeNode*);
   ~Game();
   int run();
 };

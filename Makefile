@@ -4,6 +4,7 @@ LDFLAGS=-lSDL2
 
 OBJS=obj/main.cpp.o obj/Game.cpp.o obj/Drop.cpp.o obj/utils.cpp.o
 OBJS+=obj/Timer.cpp.o obj/Vector.cpp.o
+OBJS+=obj/RainScene.cpp.o
 
 bin/rain: $(OBJS)
 	$(CXX) $(CFLAGS) $(LDFLAGS) $^ -o $@
@@ -13,5 +14,5 @@ obj/%.cpp.o: src/%.cpp
 
 .PHONY: clean
 clean:
-	rm obj/*
-	rm bin/*
+	rm -rf obj/*
+	rm -rf bin/*

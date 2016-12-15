@@ -1,9 +1,9 @@
-#include <iostream>
 #include <Game.h>
-#include <utils.h>
+#include <sizes.h>
+#include <RainScene.h>
 
 int main(int argc, char **argv) {
-  Game *game = new Game(argc, argv);
+  Game *game = new Game(new RainScene (NDROPS));
 
   int ret = game->run();
   delete game;

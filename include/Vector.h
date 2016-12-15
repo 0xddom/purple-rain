@@ -13,6 +13,11 @@ class Vector {
 
   Vector operator+(Vector);
   Vector operator+=(Vector);
+
+  Vector operator*(float);
+
+  float dot(Vector);
+  float length();
 };
 
 #endif
