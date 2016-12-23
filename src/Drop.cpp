@@ -12,33 +12,13 @@ Drop::Drop()
 
 Drop::~Drop() {}
 
-void Drop::update() {
+void Drop::applyForces() {
   pos += speed;
   speed += acc;
-
-  if (pos.y > SURFACE_HEIGHT) reset ();
-
-#ifdef DEBUG
-  fprintf(stdout,
-          "pos(%f, %f, %f)\n"
-          "speed(%f, %f, %f)\n"
-          "acc(%f, %f, %f)\n\n",
-          pos.x, pos.y, pos.z,
-          speed.x, speed.y, speed.z,
-          acc.x, acc.y, acc.z);
-#endif
 }
 
-void Drop::draw(SDL_Renderer *renderer) {
-  SDL_SetRenderDrawColor (renderer, DROP_COLOR);
-  drawLine (renderer);
-}
-
-void Drop::drawLine(SDL_Renderer *renderer) {
-  int i;
-  for (i = 0; i < thick; i++) {
-    SDL_RenderDrawLine (renderer, pos.x + i, pos.y, pos.x + i, pos.y + len);
-  }
+bool Drop::isOffLimits(int limit) {
+  return pos.y > limit;
 }
 
 void Drop::reset() {
@@ -49,4 +29,20 @@ void Drop::reset() {
   len = floor (map (pos.z, 0, 20, 10, 20));
   thick = floor (map (pos.z, 0, 20, 1, 3));
   acc.y = map (pos.z, 0, 20, 0.01, 0.2);
+}
+
+float Drop::getX() {
+  return pos.x;
+}
+
+float Drop::getY() {
+  return pos.y;
+}
+
+float Drop::getThickness() {
+  return thick;
+}
+
+float Drop::getLength() {
+  return len;
 }

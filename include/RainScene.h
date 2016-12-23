@@ -3,12 +3,12 @@
 
 #include <ICompositeNode.h>
 #include <SDL2/SDL.h>
-#include <Drop.h>
+#include <DropNode.h>
 
 class RainScene : public ICompositeNode {
  private:
   int ndrops;
-  Drop **drops;
+  DropNode **drops;
 
   void background(SDL_Renderer*,int, int, int, int);
 

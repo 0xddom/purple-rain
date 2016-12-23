@@ -7,14 +7,14 @@ RainScene::RainScene(int ndrops)
   : ndrops(ndrops) {
   int i;
 
-  drops = (Drop **)calloc (ndrops, sizeof (Drop *));
+  drops = (DropNode **)calloc (ndrops, sizeof (DropNode *));
   if (drops == NULL) {
     perror("calloc");
     return;
   }
 
   for (i = 0; i < ndrops; i++) {
-    drops[i] = new Drop ();
+    drops[i] = new DropNode ();
   }
 }
 
